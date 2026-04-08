@@ -30,7 +30,7 @@ const SignUp = () => {
 
       // 3. Handle Success
       setMessage("User Registered Successfully! ✅");
-      console.log("Backend Response:", response.data);
+      // console.log("Backend Response:", response.data);
     } catch (err) {
       // 4. Handle Errors (like Email already exists)
       const errorMsg = err.response?.data?.message || "Registration Failed ❌";
