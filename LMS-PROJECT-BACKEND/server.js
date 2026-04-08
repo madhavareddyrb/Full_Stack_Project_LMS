@@ -87,7 +87,7 @@ app.post("/login", async (req, res) => {
 
     // 1. Search for the user
     const userDocument = await userSchema.findOne({ Email: email });
-
+console.log({email, password}, "Email, Passowrd from client" )
     // 2. Check if the document is null (Email not found)
     if (userDocument === undefined || userDocument === null) {
       return res.status(404).json({

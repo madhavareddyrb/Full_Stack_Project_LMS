@@ -59,7 +59,7 @@ export default function Navbar() {
           },
         )}
       >
-            <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 md:flex">
           {links.map((link, i) => (
             <a
               key={i}
@@ -69,13 +69,13 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-        
 
+          <NavLink to="/login">
+            <Button variant="outline">Sign In</Button>
+          </NavLink>
 
-          <Button variant="outline">Sign In</Button>
           <Button>
-
-          <NavLink to="/signup">SignUP</NavLink>
+            <NavLink to="/signup">SignUP</NavLink>
           </Button>
           {/* <Button>Get Started</Button> */}
         </div>
@@ -120,7 +120,9 @@ export default function Navbar() {
             <Button variant="outline" className="w-full">
               Sign
             </Button>
-            <Button variant="outline" className="w-full">Sign Up</Button>
+            <Button variant="outline" className="w-full">
+              Sign Up
+            </Button>
             <Button className="w-full">Sign UP</Button>
           </div>
         </div>
