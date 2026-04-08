@@ -4,6 +4,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 import { useScroll } from "@/components/ui/use-scroll";
+import {NavLink} from "react-router-dom"
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
@@ -68,8 +69,15 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+        
+
+
           <Button variant="outline">Sign In</Button>
-          <Button>Get Started</Button>
+          <Button>
+
+          <NavLink to="/signup">SignUP</NavLink>
+          </Button>
+          {/* <Button>Get Started</Button> */}
         </div>
         <Button
           size="icon"
@@ -110,7 +118,7 @@ export default function Navbar() {
           </div>
           <div className="flex flex-col gap-2">
             <Button variant="outline" className="w-full">
-              Sign In
+              Sign
             </Button>
             <Button variant="outline" className="w-full">Sign Up</Button>
             <Button className="w-full">Sign UP</Button>

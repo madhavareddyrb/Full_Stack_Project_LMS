@@ -40,12 +40,15 @@ const SignUp = () => {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto" }}>
+    <div style={{ maxWidth: "350px", margin: "auto" }}>
       <h2>LMS Signup</h2>
       {message && <p>{message}</p>}
 
       <form onSubmit={handleSubmit}>
         {/* Use the same input fields from before */}
+        <label htmlFor="" className="w-100 m-4">
+          UserName:{" "}
+        </label>
         <input
           type="text"
           name="userName"
@@ -53,6 +56,10 @@ const SignUp = () => {
           onChange={handleChange}
           required
         />
+        <label htmlFor="" className="w-100 m-4">
+          Email:{" "}
+        </label>
+
         <input
           type="email"
           name="Email"
@@ -60,6 +67,10 @@ const SignUp = () => {
           onChange={handleChange}
           required
         />
+        <label htmlFor="" className="w-100 m-4">
+          Password:{" "}
+        </label>
+
         <input
           type="password"
           name="Password"
@@ -67,6 +78,10 @@ const SignUp = () => {
           onChange={handleChange}
           required
         />
+        <label htmlFor="" className=" m-4">
+          Confirm Pasword:{" "}
+        </label>
+
         <input
           type="password"
           name="ConfirmPassword"
@@ -75,11 +90,20 @@ const SignUp = () => {
           required
         />
 
-        <select name="Gender" onChange={handleChange} required>
+        <select
+          name="Gender"
+          onChange={handleChange}
+          className="w-100 m-4"
+          required
+        >
           <option value="">Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
+
+        <label htmlFor="" className="w-100 m-4">
+          Date:{" "}
+        </label>
 
         <input
           type="date"
@@ -87,6 +111,10 @@ const SignUp = () => {
           onChange={handleChange}
           required
         />
+        <label htmlFor="" className="w-100 m-4">
+          Nationality:{" "}
+        </label>
+
         <input
           type="text"
           name="Nationality"
@@ -95,7 +123,9 @@ const SignUp = () => {
           required
         />
 
-        <button type="submit">Register</button>
+        <button type="submit" className="bg-black text-white p-2 w-100">
+          Register
+        </button>
       </form>
     </div>
   );
