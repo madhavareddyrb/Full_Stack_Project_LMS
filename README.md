@@ -17,7 +17,7 @@
 
 ### Authentication:
 
-#### Steps for Backend
+#### Steps - SignUp
 
 1. Connect MOngoDB using mongoose and check connection before moving, cors setup, express setup 
 
@@ -37,4 +37,26 @@
 
 9. If Everything went well you see your first document in mongodb
 
+#### Steps - SignIn
 
+1. After succesfull register or SignUp the data is going to store in User Schema and check where data is Present first.
+
+2. After Checking Data where is present. To get That Data there are three methods are there find(), findOne(), findbyId(). Every method has there roles for examples what is correct method to flow accroding to process. 
+
+3. For find(), find means it will get all documenst present in DB. This is good for getting list of data in our project like geting all data at home api,myLearning all data (courses) which we have enrolled etc
+
+4. For findOne(), findOne means find that data by using any one filed.which already present DB. For In Our case we have used findOne to check where email is present and password is present in signIn. Used To check if user is present or not. Any Particular this is present or not
+
+5. For findById(), findById is used to select using id. for every DB document and Id is going to create automatically by DB Mongoose. We use that id get that particular data only. Direct Filter. 
+
+6. NOw Come back to signin we use FindOne() and we pass email and get that particular document which present in DB. If not it return undefined to log this errror we use if condton if DB return undefined we pass an error mesaage to user that email is not registerd. 
+
+7. If we get any document for that email means that user is alreday regiseterd and now we specifically check password. If user types wrongs password we send an message tat password is wrong.
+
+8. If both conditions meet then we enter to Login page succcess and we movie to User Profile.
+
+9. This are the steps to follow. And First Check API is working are not properly getting data,checking user email, password data in POSTMAN api, thunder client and Later connect to frontend
+
+10. Create an Form and create to variables to egt email password fileds and and message for getting error display on client.
+
+11. Write an submit method that hits LOgin api and  check the functonality.
