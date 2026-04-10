@@ -1,26 +1,34 @@
-const Login = require("../models/Login");
 const userSchema = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const userDocument = await userSchema.findOne({ Email: email });
-    console.log({ email, password }, "Email, Passowrd from client");
+    console.log(
+      { email, password },
+      "Email, Passowrd from documentfrom client",
+    );
+    console.log(password, "password form FE");
+    console.log(userDocument.Password, "document lo unna password");
+    // const hashPassword = await bcrypt.hash(password, 30)
+    // console.log(hashPassword)
     const userPasswordbcrypt = await bcrypt.compare(
       password,
       userDocument.Password,
     );
-    console.log(userPasswordbcrypt)
+    console.log(userPasswordbcrypt);
 
     const token = jwt.sign(
       {
         userId: userDocument.id,
         email: userDocument.Email,
       },
-      process.env.JWT_SECERT_KEY,{expiresIn: "5"},
+      process.env.JWT_SECERT_KEY,
+      { expiresIn: "5" },
     );
     res.json(token);
 
