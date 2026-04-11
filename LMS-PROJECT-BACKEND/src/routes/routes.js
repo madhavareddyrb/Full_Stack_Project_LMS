@@ -8,19 +8,34 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     const userDocument = await userSchema.findOne({ Email: email });
-    console.log(
-      { email, password },
-      "Email, Passowrd from documentfrom client",
-    );
-    console.log(password, "password form FE");
-    console.log(userDocument.Password, "document lo unna password");
-    // const hashPassword = await bcrypt.hash(password, 30)
-    // console.log(hashPassword)
-    const userPasswordbcrypt = await bcrypt.compare(
+
+    // console.log(
+    //   { email, password },
+    //   "Email, Passowrd from documentfrom client",
+    // );
+
+    // console.log(password, "password form FE");
+    // console.log(userDocument.Password, "document lo unna password");
+
+    // const hashPassword = await bcrypt.hash(password, 10);
+    // console.log(hashPassword);
+    if (userDocument === undefined || userDocument === null) {
+      return res.status(404).json({
+        message: "Email is not registered",
+      });
+    }
+    const isPasswordMatch = await bcrypt.compare(
       password,
       userDocument.Password,
     );
-    console.log(userPasswordbcrypt);
+
+    console.log(isPasswordMatch);
+
+    if (!isPasswordMatch) {
+      return res.json({
+        message: "Invalid password",
+      });
+    }
 
     const token = jwt.sign(
       {
@@ -28,27 +43,12 @@ exports.login = async (req, res) => {
         email: userDocument.Email,
       },
       process.env.JWT_SECERT_KEY,
-      { expiresIn: "5" },
+      { expiresIn: "1h" },
     );
-    res.json(token);
-
-    if (userDocument === undefined || userDocument === null) {
-      return res.status(404).json({
-        message: "Email is not registered",
-      });
-    }
-    if (userDocument.Password != password) {
-      return res.status(404).json({
-        message: "Password is Wrong",
-      });
-    }
-
-    // 3. Now it is safe to check the password
-    if (userDocument.Password === password) {
-      return res.json({ message: "Login Successful" });
-    } else {
-      return res.status(401).json({ message: "Invalid Password" });
-    }
+    return res.json({
+      message: "Login successful",
+      token,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -79,7 +79,19 @@ exports.signup = async (req, res) => {
   //   });
   try {
     const userAccountCreation = new userSchema(req.body);
+    const { Email, Password } = userAccountCreation;
+    console.log(Email, Password, "signup details");
+    const hashPassword = await bcrypt.hash(Password, 10);
+    userAccountCreation.Password = hashPassword;
+    console.log(userAccountCreation);
+
+    const existingUser = await userSchema.findOne({ Email: Email });
+    if (existingUser) {
+      return res.json({ message: "User Already Exits" });
+    }
+
     await userAccountCreation.save();
+
     return res.json({
       success: true,
       message: "User created Successfully",
