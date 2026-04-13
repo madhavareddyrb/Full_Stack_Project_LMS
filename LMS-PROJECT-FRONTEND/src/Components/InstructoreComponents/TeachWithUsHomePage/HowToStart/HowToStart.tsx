@@ -5,10 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 interface TabContent {
-  badge: string;
-  title: string;
+  // badge: string;
   description: string;
-  buttonText: string;
+  action_description: string;
+  helptitle: string;
+  helpdescription:string;
+  // buttonText?: string;
   imageSrc: string;
   imageAlt: string;
 }
@@ -37,13 +39,17 @@ const HowToStart = ({
       icon: <Zap className="h-auto w-4 shrink-0" />,
       label: "Plan Your Curriculum",
       content: {
-        badge: "Modern Tactics",
-        title: "Make your site a true standout.",
+        // badge: "Modern Tactics",
         description:
-          "Discover new web trends that help you craft sleek, highly functional sites that drive traffic and convert leads into customers.",
-        buttonText: "See Plans",
+          "You start with your passion and knowledge. Then choose a promising topic with the help of our Marketplace Insights tool.",
+        action_description:
+          "The way that you teach — what you bring to it — is up to you.",
+        helptitle: "How we help you",
+        helpdescription:
+          "We offer plenty of resources on how to create your first course. And, our instructor dashboard and curriculum pages help keep you organized.",
+        // buttonText: "",
         imageSrc:
-          "https://shadcnblocks.com/images/block/placeholder-dark-1.svg",
+          "https://s.udemycdn.com/teaching/plan-your-curriculum-2x-v3.jpg",
         imageAlt: "placeholder",
       },
     },
@@ -52,13 +58,16 @@ const HowToStart = ({
       icon: <Pointer className="h-auto w-4 shrink-0" />,
       label: "Record Your Video",
       content: {
-        badge: "Expert Features",
-        title: "Boost your site with top-tier design.",
+        // badge: "Modern Tactics",
         description:
-          "Use stellar design to easily engage users and strengthen their loyalty. Create a seamless experience that keeps them coming back for more.",
-        buttonText: "See Tools",
-        imageSrc:
-          "https://shadcnblocks.com/images/block/placeholder-dark-2.svg",
+          "You start with your passion and knowledge. Then choose a promising topic with the help of our Marketplace Insights tool.",
+        action_description:
+          "The way that you teach — what you bring to it — is up to you.",
+        helptitle: "How we help you",
+        helpdescription:
+          "We offer plenty of resources on how to create your first course. And, our instructor dashboard and curriculum pages help keep you organized.",
+        // buttonText: "",
+        imageSrc: "https://s.udemycdn.com/teaching/record-your-video-2x-v3.jpg",
         imageAlt: "placeholder",
       },
     },
@@ -67,13 +76,17 @@ const HowToStart = ({
       icon: <Layout className="h-auto w-4 shrink-0" />,
       label: "Launch Your Course",
       content: {
-        badge: "Course Launch",
-        title: "Build an advanced web experience.",
+        // badge: "Modern Tactics",
         description:
-          "Lift your brand with modern tech that grabs attention and drives action. Create a digital experience that stands out from the crowd.",
-        buttonText: "See Options",
+          "You start with your passion and knowledge. Then choose a promising topic with the help of our Marketplace Insights tool.",
+        action_description:
+          "The way that you teach — what you bring to it — is up to you.",
+        helptitle: "How we help you",
+        helpdescription:
+          "We offer plenty of resources on how to create your first course. And, our instructor dashboard and curriculum pages help keep you organized.",
+        // buttonText: "",
         imageSrc:
-          "https://shadcnblocks.com/images/block/placeholder-dark-3.svg",
+          "https://s.udemycdn.com/teaching/launch-your-course-2x-v3.jpg",
         imageAlt: "placeholder",
       },
     },
@@ -109,18 +122,24 @@ const HowToStart = ({
                 className="grid place-items-center gap-20 lg:grid-cols-2 lg:gap-10"
               >
                 <div className="flex flex-col gap-5">
-                  <Badge variant="outline" className="w-fit bg-background">
+                  {/* <Badge variant="outline" className="w-fit bg-background">
                     {tab.content.badge}
-                  </Badge>
-                  <h3 className="text-2xl font-semibold lg:text-5xl">
-                    {tab.content.title}
-                  </h3>
+                  </Badge> */}
                   <p className="text-muted-foreground lg:text-lg">
                     {tab.content.description}
                   </p>
-                  <Button className="mt-2.5 w-fit gap-2" size="lg">
+                  <p className="text-muted-foreground lg:text-lg">
+                    {tab.content.action_description}
+                  </p>
+                  <h3 className="text-1xl font-semibold lg:text-2xl">
+                    {tab.content.helptitle}
+                  </h3>
+                  <p className="text-muted-foreground lg:text-lg">
+                    {tab.content.helpdescription}
+                  </p>
+                  {/* <Button className="mt-2.5 w-fit gap-2" size="lg">
                     {tab.content.buttonText}
-                  </Button>
+                  </Button> */}
                 </div>
                 <img
                   src={tab.content.imageSrc}
