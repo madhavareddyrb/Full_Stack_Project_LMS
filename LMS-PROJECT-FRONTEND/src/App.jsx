@@ -6,6 +6,7 @@ import HomePage from './Components/HomePageComponents/HomePage';
 import SignUp from './Components/Authentication/SignUp/SignUp';
 import SignIn from './Components/Authentication/SignIn/SignIn';
 import UserDashboard from './Components/UserProfileComponents/UserDashboard/UserDashboard';
+import TeachWithUsHomePage from './Components/InstructoreComponents/TeachWithUsHomePage/TeachWithUsHomePage';
 
 
 
@@ -19,6 +20,9 @@ function App() {
           <Route path="signup" element=<SignUp /> />
           <Route path="login" element=<SignIn /> />
           <Route path="userdashboard" element=<UserDashboard /> />
+
+          {/* Teacher DashBoards */}
+          <Route path="teachwithus" element=<TeachWithUsHomePage /> />
         </Routes>
       </BrowserRouter>
     </>
