@@ -109,7 +109,7 @@ const DashboardMetricCard: React.FC<DashboardMetricCardProps> = ({
 
 const TotalStrength = () => {
   return (
-    <div className="p-8 bg-background border rounded-lg max-w-7xl mx-auto shadow-md mt-10 bg-gray-300">
+    <div className="p-8 bg-background border rounded-lg max-w-7xl mx-auto shadow-md mt-20 bg-gray-300">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
         <DashboardMetricCard
           title="Total Users"

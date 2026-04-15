@@ -60,12 +60,12 @@ const HowToStart = ({
       content: {
         // badge: "Modern Tactics",
         description:
-          "You start with your passion and knowledge. Then choose a promising topic with the help of our Marketplace Insights tool.",
+          "Use basic tools like a smartphone or a DSLR camera. Add a good microphone and you’re ready to start.",
         action_description:
-          "The way that you teach — what you bring to it — is up to you.",
+          "If you don’t like being on camera, just capture your screen. Either way, we recommend two hours or more of video for a paid course.",
         helptitle: "How we help you",
         helpdescription:
-          "We offer plenty of resources on how to create your first course. And, our instructor dashboard and curriculum pages help keep you organized.",
+          "Our support team is available to help you throughout the process and provide feedback on test videos.",
         // buttonText: "",
         imageSrc: "https://s.udemycdn.com/teaching/record-your-video-2x-v3.jpg",
         imageAlt: "placeholder",
@@ -78,12 +78,12 @@ const HowToStart = ({
       content: {
         // badge: "Modern Tactics",
         description:
-          "You start with your passion and knowledge. Then choose a promising topic with the help of our Marketplace Insights tool.",
+          "Gather your first ratings and reviews by promoting your course through social media and your professional networks.",
         action_description:
-          "The way that you teach — what you bring to it — is up to you.",
+          "Your course will be discoverable in our marketplace where you earn revenue from each paid enrollment.",
         helptitle: "How we help you",
         helpdescription:
-          "We offer plenty of resources on how to create your first course. And, our instructor dashboard and curriculum pages help keep you organized.",
+          "Our custom coupon tool lets you offer enrollment incentives while our global promotions drive traffic to courses. There’s even more opportunity for courses chosen for Udemy Business.",
         // buttonText: "",
         imageSrc:
           "https://s.udemycdn.com/teaching/launch-your-course-2x-v3.jpg",
@@ -93,7 +93,7 @@ const HowToStart = ({
   ],
 }: Feature108Props) => {
   return (
-    <section className="py-32">
+    <section className="py-20">
       <div className="container mx-auto">
         <div className="flex flex-col items-center gap-4 text-center">
           <Badge variant="outline">{badge}</Badge>
@@ -114,7 +114,7 @@ const HowToStart = ({
               </TabsTrigger>
             ))}
           </TabsList>
-          <div className="mx-auto mt-8 max-w-screen-xl rounded-2xl bg-muted/70 p-6 lg:p-16">
+          <div className="mx-auto mt-8 max-w-screen-xl rounded-2xl bg-muted/70 p-3 lg:p-10">
             {tabs.map((tab) => (
               <TabsContent
                 key={tab.value}
