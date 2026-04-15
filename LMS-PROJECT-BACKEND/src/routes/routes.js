@@ -100,3 +100,12 @@ exports.signup = async (req, res) => {
     console.error("Signup Error:", error.message);
   }
 };
+
+exports.userProfile = async (req, res) => {
+  try {
+    const userData = await userSchema.find({});
+    res.json(userData);
+  } catch (error) {
+    res.json("data not fetching");
+  }
+};
