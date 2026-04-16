@@ -40,8 +40,8 @@ export default function TeachWithUsReasons(){
         {teachCardsData.map((card) => (
           <GlowCard key={card.id} glowColor={card.glowColor}>
             <div className="flex flex-col gap-2">
-              <img src={card.image} alt="" className="w-[100px]"/>
-              <h2 className="text-xl font-semibold">{card.title}</h2>
+              <img src={card.image} alt={card.image} className="w-[100px] reasons-img-class"/>
+              <h2 className="reasons_heading_class">{card.title}</h2>
               <p className="text-m text-gray-700">{card.description}</p>
             </div>
           </GlowCard>

@@ -23,6 +23,7 @@ function App() {
 
           {/* Teacher DashBoards */}
           <Route path="teachwithus" element=<TeachWithUsHomePage /> />
+          <Route path="user/profile" element=<UserDashboard /> />
         </Routes>
       </BrowserRouter>
     </>
