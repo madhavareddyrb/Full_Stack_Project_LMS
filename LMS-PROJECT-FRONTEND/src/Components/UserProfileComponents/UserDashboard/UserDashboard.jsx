@@ -1,3 +1,4 @@
+import Navbar from "../../HomePageComponents/Navbar/Navbar"
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -14,6 +15,15 @@ export default function UserDashboard() {
       }
     };
 
+  return (<>
+  
+<Navbar/>
+
+  <h2>User Profile Coming Soon</h2>
+
+  
+  </>)
+}
     fetchUserData();
   }, []);
 
