@@ -1,107 +1,157 @@
-const userSchema = require("../models/User");
+const userModel = require("../models/Users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+
+// exports.login = async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     const userDocument = await userModel.findOne({ email: email });
+
+//     if (userDocument === undefined || userDocument === null) {
+//       return res.status(401).json({
+//         message: "Email is not registered",
+//       });
+//     }
+//     const isPasswordMatch = await bcrypt.compare(
+//       password,
+//       userDocument.password,
+//     );
+
+//     if (!isPasswordMatch) {
+//       return res.status(401).json({
+//         message: "Invalid password",
+//       });
+//     }
+
+//     const token = jwt.sign(
+//       {
+//         userId: userDocument.id,
+//         email: userDocument.Email,
+//       },
+//       process.env.JWT_SECERT_KEY,
+//       { expiresIn: "1h" },
+//     );
+//     return res.json({
+//       message: "Login successful",
+//       token,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };
 
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const userDocument = await userSchema.findOne({ Email: email });
-
-    // console.log(
-    //   { email, password },
-    //   "Email, Passowrd from documentfrom client",
-    // );
-
-    // console.log(password, "password form FE");
-    // console.log(userDocument.Password, "document lo unna password");
-
-    // const hashPassword = await bcrypt.hash(password, 10);
-    // console.log(hashPassword);
-    if (userDocument === undefined || userDocument === null) {
-      return res.status(401).json({
-        message: "Email is not registered",
-      });
-    }
-    const isPasswordMatch = await bcrypt.compare(
-      password,
-      userDocument.Password,
-    );
-
-    // console.log(isPasswordMatch);
-
-    if (!isPasswordMatch) {
-      return res.status(401).json({
-        message: "Invalid password",
+    // 🔹 1. Validate input
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required",
       });
     }
 
+    // 🔹 2. Find user
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+    }
+
+    // 🔹 3. Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+    }
+
+    // 🔹 4. Generate JWT
     const token = jwt.sign(
       {
-        userId: userDocument.id,
-        email: userDocument.Email,
+        userId: user._id,
+        email: user.email,
+        role: user.role, // useful for LMS
       },
-      process.env.JWT_SECERT_KEY,
+      process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" },
     );
-    return res.json({
+
+    // 🔹 5. Send response (no password)
+    return res.status(200).json({
+      success: true,
       message: "Login successful",
       token,
+      user: {
+        id: user._id,
+        userName: user.userName,
+        email: user.email,
+        role: user.role,
+      },
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Login Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
   }
 };
 
 exports.signup = async (req, res) => {
-  // const {
-  //   userName,
-  //   Email,
-  //   Password,
-  //   ConfirmPassword,
-  //   Gender,
-  //   DateOfBirth,
-  //   Nationality,
-  // } = req.body;
-
-  // console.log(req.body);
-  // try {
-  //   const userAccountCreation = new User({
-  //     userName,
-  //     Email,
-  //     Password,
-  //     ConfirmPassword,
-  //     Gender,
-  //     DateOfBirth,
-  //     Nationality,
-  //   });
   try {
-    const userAccountCreation = new userSchema(req.body);
-    const { Email, Password, UserName } = userAccountCreation;
-    console.log(Email, Password, "signup details");
-    const hashPassword = await bcrypt.hash(Password, 10);
-    userAccountCreation.Password = hashPassword;
-    console.log(userAccountCreation);
+    const { userName, email, password } = req.body;
 
-    const existingUser = await userSchema.findOne({ Email: Email });
-    const existingUserName = await userSchema.findOne({ UserName: UserName });
-
-    if (existingUserName) {
-      return res.json({ message: "UserName is Taken " });
+    if (!userName || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
     }
+
+    const existingUser = await userModel.findOne({
+      $or: [{ email }, { userName }],
+    });
+
     if (existingUser) {
-      return res.json({ message: "User Already Exits" });
+      return res.status(409).json({
+        success: false,
+        message:
+          existingUser.email === email
+            ? "Email already exists"
+            : "Username already taken",
+      });
     }
 
-    await userAccountCreation.save();
+    const newUser = await userModel.create({
+      userName,
+      email,
+      password,
+    });
 
-    return res.json({
+    newUser.password = undefined;
+
+    return res.status(201).json({
       success: true,
-      message: "User created Successfully",
+      message: "User created successfully",
+      data: newUser,
     });
   } catch (error) {
-    console.error("Signup Error:", error.message);
+    console.error("Signup Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
   }
 };
