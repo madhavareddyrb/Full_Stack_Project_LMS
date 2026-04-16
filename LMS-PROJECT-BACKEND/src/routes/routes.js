@@ -164,3 +164,10 @@ exports.userProfile = async (req, res) => {
     res.json("data not fetching");
   }
 };
+
+exports.verifyToken = (req, res) => {
+  res.status(200).json({
+    message: "Token is valid",
+    user: req.user,
+  });
+};

@@ -30,7 +30,7 @@ const Signin = () => {
       console.log(getAccess_token);
 
       localStorage.setItem("access_token", response.data.token);
-      navigate("/userdashboard");
+      navigate("/user/profile");
     } catch (error) {
       setError(
         error.response?.data?.message || "An error occurred during login.",
