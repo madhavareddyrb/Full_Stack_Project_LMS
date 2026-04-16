@@ -20,7 +20,7 @@ exports.login = async (req, res) => {
     // const hashPassword = await bcrypt.hash(password, 10);
     // console.log(hashPassword);
     if (userDocument === undefined || userDocument === null) {
-      return res.status(404).json({
+      return res.status(401).json({
         message: "Email is not registered",
       });
     }
@@ -29,10 +29,10 @@ exports.login = async (req, res) => {
       userDocument.Password,
     );
 
-    console.log(isPasswordMatch);
+    // console.log(isPasswordMatch);
 
     if (!isPasswordMatch) {
-      return res.json({
+      return res.status(401).json({
         message: "Invalid password",
       });
     }
@@ -79,13 +79,18 @@ exports.signup = async (req, res) => {
   //   });
   try {
     const userAccountCreation = new userSchema(req.body);
-    const { Email, Password } = userAccountCreation;
+    const { Email, Password, UserName } = userAccountCreation;
     console.log(Email, Password, "signup details");
     const hashPassword = await bcrypt.hash(Password, 10);
     userAccountCreation.Password = hashPassword;
     console.log(userAccountCreation);
 
     const existingUser = await userSchema.findOne({ Email: Email });
+    const existingUserName = await userSchema.findOne({ UserName: UserName });
+
+    if (existingUserName) {
+      return res.json({ message: "UserName is Taken " });
+    }
     if (existingUser) {
       return res.json({ message: "User Already Exits" });
     }

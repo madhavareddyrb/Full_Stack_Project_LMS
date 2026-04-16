@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios"; // 1. Import Axios
+import axios from "axios";
+import "./SignUp.css"; // import CSS file
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -12,121 +13,120 @@ const SignUp = () => {
     Nationality: "",
   });
 
+  const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
+
+  const validate = () => {
+    let newErrors = {};
+
+    if (!formData.userName) newErrors.userName = "Username required";
+    if (!formData.Email.includes("@")) newErrors.Email = "Invalid email";
+    if (formData.Password.length < 6) newErrors.Password = "Min 6 characters";
+    if (formData.Password !== formData.ConfirmPassword)
+      newErrors.ConfirmPassword = "Passwords not match";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate()) return;
 
     try {
-      // 2. The API Call
-      const response = await axios.post(
-        "http://localhost:3000/signup",
-        formData,
-      );
-
-      // 3. Handle Success
-      setMessage("User Registered Successfully! ✅");
-      // console.log("Backend Response:", response.data);
+      await axios.post("http://localhost:3000/signup", formData);
+      setMessage("Success ✅");
     } catch (err) {
-      // 4. Handle Errors (like Email already exists)
-      const errorMsg = err.response?.data?.message || "Registration Failed ❌";
-      setMessage(errorMsg);
-      console.error("Error details:", err);
+      setMessage("Failed ❌");
     }
   };
 
   return (
-    <div style={{ maxWidth: "350px", margin: "auto" }}>
-      <h2>LMS Signup</h2>
-      {message && <p>{message}</p>}
+    <div className="signup-container">
+      <div className="signup-card">
+        <h2 className="signup-title">Signup</h2>
 
-      <form onSubmit={handleSubmit}>
-        {/* Use the same input fields from before */}
-        <label htmlFor="" className="w-100 m-4">
-          UserName:{" "}
-        </label>
-        <input
-          type="text"
-          name="userName"
-          placeholder="Username"
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="" className="w-100 m-4">
-          Email:{" "}
-        </label>
+        {message && <p className="signup-message">{message}</p>}
 
-        <input
-          type="email"
-          name="Email"
-          placeholder="Email"
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="" className="w-100 m-4">
-          Password:{" "}
-        </label>
+        <form onSubmit={handleSubmit} className="signup-form">
+          <label htmlFor="UserName">UserName:</label>
+          <input
+            className="signup-input"
+            type="text"
+            name="userName"
+            placeholder="Username"
+            onChange={handleChange}
+          />
+          {errors.userName && (
+            <span className="signup-error">{errors.userName}</span>
+          )}
+          <label htmlFor="UserName">Email:</label>
 
-        <input
-          type="password"
-          name="Password"
-          placeholder="Password"
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="" className=" m-4">
-          Confirm Pasword:{" "}
-        </label>
+          <input
+            className="signup-input"
+            type="email"
+            name="Email"
+            placeholder="Email"
+            onChange={handleChange}
+          />
+          {errors.Email && <span className="signup-error">{errors.Email}</span>}
+          <label htmlFor="UserName">Password:</label>
 
-        <input
-          type="password"
-          name="ConfirmPassword"
-          placeholder="Confirm Password"
-          onChange={handleChange}
-          required
-        />
+          <input
+            className="signup-input"
+            type="password"
+            name="Password"
+            placeholder="Password"
+            onChange={handleChange}
+          />
+          <label htmlFor="UserName">Confirm Password:</label>
 
-        <select
-          name="Gender"
-          onChange={handleChange}
-          className="w-100 m-4"
-          required
-        >
-          <option value="">Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
+          <input
+            className="signup-input"
+            type="password"
+            name="ConfirmPassword"
+            placeholder="Confirm Password"
+            onChange={handleChange}
+          />
 
-        <label htmlFor="" className="w-100 m-4">
-          Date:{" "}
-        </label>
+          <label htmlFor="UserName">Select Gender</label>
 
-        <input
-          type="date"
-          name="DateOfBirth"
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="" className="w-100 m-4">
-          Nationality:{" "}
-        </label>
+          <select
+            className="signup-select"
+            name="Gender"
+            onChange={handleChange}
+          >
+            <option value="">Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <label htmlFor="UserName">Date Of Birth:</label>
 
-        <input
-          type="text"
-          name="Nationality"
-          placeholder="Nationality"
-          onChange={handleChange}
-          required
-        />
+          <input
+            className="signup-input"
+            type="date"
+            name="DateOfBirth"
+            onChange={handleChange}
+          />
 
-        <button type="submit" className="bg-black text-white p-2 w-100">
-          Register
-        </button>
-      </form>
+          <input
+            className="signup-input"
+            type="text"
+            name="Nationality"
+            placeholder="Nationality"
+            onChange={handleChange}
+          />
+
+          <button className="signup-button" type="submit">
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
