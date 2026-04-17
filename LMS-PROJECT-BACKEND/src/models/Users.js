@@ -27,15 +27,6 @@ const userModel = new mongoose.Schema(
   { timestamps: true },
 );
 
-// userModel.pre("save", async function (next) {
-//   if (!this.isModified("password")) return next();
-
-//   const bcrypt = require("bcrypt");
-//   this.password = await bcrypt.hash(this.password, 10);
-
-//   next();
-// });
-
 userModel.pre("save", async function () {
   if (!this.isModified("password")) return;
 

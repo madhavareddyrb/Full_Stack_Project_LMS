@@ -1,4 +1,4 @@
-import Navbar from "../../HomePageComponents/Navbar/Navbar"
+import Navbar from "../../HomePageComponents/Navbar/Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -14,27 +14,25 @@ export default function UserDashboard() {
         console.log(error.message);
       }
     };
+  });
 
-  return (<>
-  
-<Navbar/>
+  async () => {
+    const token = localStorage.getItem("access_token");
+    console.log(token);
+    if (!token) return;
 
-  <h2>User Profile Coming Soon</h2>
-
-  
-  </>)
-}
-    fetchUserData();
-  }, []);
-
-  const dataMap = getUserData.map((data, index) => (
-    <h2 key={index}>{data.Email}</h2>
-  ));
+    await axios.get("http://localhost:3000/user/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
 
   return (
     <>
-      <h2>User Profile</h2>
-      {dataMap}
+      <Navbar />
+
+      <h2>User Profile Coming Soon</h2>
     </>
   );
 }
