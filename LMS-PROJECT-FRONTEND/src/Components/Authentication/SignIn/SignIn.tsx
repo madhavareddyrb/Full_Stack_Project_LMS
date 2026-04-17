@@ -20,21 +20,19 @@ const Signin = () => {
       setError("Please enter both email and password.");
       return;
     }
+
     try {
       const response = await axios.post("http://localhost:3000/login", {
         email,
         password,
       });
-      setError("Login SuccessFull");
-      const getAccess_token = response.data.token;
-      console.log(getAccess_token);
+
+      setError("Login Success");
 
       localStorage.setItem("access_token", response.data.token);
       navigate("/user/profile");
-    } catch (error) {
-      setError(
-        error.response?.data?.message || "An error occurred during login.",
-      );
+    } catch (err) {
+      setError(err.response?.data?.message);
     }
   };
 

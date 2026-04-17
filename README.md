@@ -8,32 +8,31 @@
 
 3. Install react router dom for path(urls frontend)
 
-### Step 2: Shadcn SetUp and TS 
+### Step 2: Shadcn SetUp and TS
 
-1. we need to create jsconfig.json file poject level and install type node(npm install -D @types/node) and update vite.config.js 
+1. we need to create jsconfig.json file poject level and install type node(npm install -D @types/node) and update vite.config.js
 
 2. now install shadcn and it will create an ui,lib automatically. UI for advance create and ui and use that anywhere. For Example cards(with same cards courses) and install lucide react for icons
-
 
 ### Authentication:
 
 #### Steps - SignUp
 
-1. Connect MOngoDB using mongoose and check connection before moving, cors setup, express setup 
+1. Connect MOngoDB using mongoose and check connection before moving, cors setup, express setup
 
 2. Define all data fields required
 
-3. create models folder in backend and crete User.js schema and export that schema with required rules 
+3. create models folder in backend and crete User.js schema and export that schema with required rules
 
 4. create config for DataBase Connection and .env for mongodb url and PORT install dotenv
 
-5. create variables data PORT, MONGO_URL in .env at app level file  import them using require("dotenv").config();  install dotenv to access data
+5. create variables data PORT, MONGO_URL in .env at app level file import them using require("dotenv").config(); install dotenv to access data
 
-6. buy using MONGO_URI cretae db connection in db.js  import this in server.js file
+6. buy using MONGO_URI cretae db connection in db.js import this in server.js file
 
 7. And cretae an api with http method POST for signup and import User modal and use this api in frontend using axios to connect frontend and backend. this is possible because of cors
 
-8. in frontend cretae form data and with async call backend api 3000/signip in axios post method and in backend server.js use that req.body to cretae new user and  save user
+8. in frontend cretae form data and with async call backend api 3000/signip in axios post method and in backend server.js use that req.body to cretae new user and save user
 
 9. If Everything went well you see your first document in mongodb
 
@@ -41,15 +40,15 @@
 
 1. After succesfull register or SignUp the data is going to store in User Schema and check where data is Present first.
 
-2. After Checking Data where is present. To get That Data there are three methods are there find(), findOne(), findbyId(). Every method has there roles for examples what is correct method to flow accroding to process. 
+2. After Checking Data where is present. To get That Data there are three methods are there find(), findOne(), findbyId(). Every method has there roles for examples what is correct method to flow accroding to process.
 
 3. For find(), find means it will get all documenst present in DB. This is good for getting list of data in our project like geting all data at home api,myLearning all data (courses) which we have enrolled etc
 
 4. For findOne(), findOne means find that data by using any one filed.which already present DB. For In Our case we have used findOne to check where email is present and password is present in signIn. Used To check if user is present or not. Any Particular this is present or not
 
-5. For findById(), findById is used to select using id. for every DB document and Id is going to create automatically by DB Mongoose. We use that id get that particular data only. Direct Filter. 
+5. For findById(), findById is used to select using id. for every DB document and Id is going to create automatically by DB Mongoose. We use that id get that particular data only. Direct Filter.
 
-6. NOw Come back to signin we use FindOne() and we pass email and get that particular document which present in DB. If not it return undefined to log this errror we use if condton if DB return undefined we pass an error mesaage to user that email is not registerd. 
+6. NOw Come back to signin we use FindOne() and we pass email and get that particular document which present in DB. If not it return undefined to log this errror we use if condton if DB return undefined we pass an error mesaage to user that email is not registerd.
 
 7. If we get any document for that email means that user is alreday regiseterd and now we specifically check password. If user types wrongs password we send an message tat password is wrong.
 
@@ -59,5 +58,88 @@
 
 10. Create an Form and create to variables to egt email password fileds and and message for getting error display on client.
 
-11. Write an submit method that hits LOgin api and  check the functonality.
+11. Write an submit method that hits LOgin api and check the functonality.
+
+### 16-04-2026: Steps: signup, signin, Protected Route, Logout,jwt verification, auto token verification , auto logout
+
+##### 1. User Registration: Redefined My model
+
+1. Fields required name,email, password
+
+2. Here all are reequired and string type
+
+3. Before saving data in DB we need to hash password, so we use bcrypt to hash password in direct model
+
+4. we check with previous save and current if password is not modified return none, we don't want to run hashpassword unneccassary
+
+5. i have used this method in model to save hash password, this indicates that only one particular document. we we use modal name that is worng and mismatch values .
+
+6. we call this api in fronted and we save this to DB and check errors all functionality befor integrating with frontend.
+
+##### 2. Sign In Functionality
+
+1. We create an login api by checking the user is present ot not
+
+2. we validate email,password its really coming or not from user
+
+3. we Find user in signupmodel with email. If user not found we return user account not exists
+
+4. if account exists we check password match. we compare passwords using bcrypt in signup model and coming from user
+
+5. If password is not match we return Invalid Password
+
+6. If password correct then we create an JWT token.we need to use jwt.sign(to confirm the account exists ) here we have 3 options first send data,check with secreact key to verify later, expiresin (to expire token and user need to login again)
+
+7. then send response to user saying success and jwt token
+
+8. If anything failes send interval server in catch method
+
+##### 3. Token Passing through headers for authentication
+
+
+🎟️ 3. Token Handling
+Flow:
+Token received from backend
+Stored in localStorage
+Sent in every request via headers
+Authorization: Bearer <token>
+Key Concept:
+Token = user identity for future requests
+🛡️ 4. Protected Routes (Frontend)
+Flow:
+Check if token exists
+If yes → allow access
+If no → redirect to login
+Key Concept:
+UI-level protection (basic layer)
+🔍 5. Token Verification (Backend)
+Flow:
+Receive token from headers
+Verify using JWT secret
+If valid → allow request
+If invalid → return 401
+Key Concept:
+Real security happens in backend
+🔄 6. Auto Token Validation (Frontend)
+Flow:
+On app load → call /verify
+If token valid → continue
+If invalid → logout user
+Key Concept:
+Prevent using expired tokens
+🚪 7. Logout Functionality
+Flow:
+Remove token from localStorage
+Redirect to login page
+Key Concept:
+Logout = remove authentication proof
+⚠️ 8. Auto Logout (Advanced Handling)
+Flow:
+API fails with 401
+Interceptor catches error
+Remove token
+Redirect to login
+Key Concept:
+Centralized error handling
+
 

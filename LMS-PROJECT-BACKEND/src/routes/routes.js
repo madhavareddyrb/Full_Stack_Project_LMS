@@ -3,46 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-// exports.login = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-
-//     const userDocument = await userModel.findOne({ email: email });
-
-//     if (userDocument === undefined || userDocument === null) {
-//       return res.status(401).json({
-//         message: "Email is not registered",
-//       });
-//     }
-//     const isPasswordMatch = await bcrypt.compare(
-//       password,
-//       userDocument.password,
-//     );
-
-//     if (!isPasswordMatch) {
-//       return res.status(401).json({
-//         message: "Invalid password",
-//       });
-//     }
-
-//     const token = jwt.sign(
-//       {
-//         userId: userDocument.id,
-//         email: userDocument.Email,
-//       },
-//       process.env.JWT_SECERT_KEY,
-//       { expiresIn: "1h" },
-//     );
-//     return res.json({
-//       message: "Login successful",
-//       token,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
-
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -61,7 +21,7 @@ exports.login = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "Invalid email or password",
+        message: "Account does not exists",
       });
     }
 
@@ -71,7 +31,7 @@ exports.login = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        message: "Invalid email or password",
+        message: "Invalid password",
       });
     }
 
@@ -80,7 +40,6 @@ exports.login = async (req, res) => {
       {
         userId: user._id,
         email: user.email,
-        role: user.role, // useful for LMS
       },
       process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" },
@@ -95,7 +54,6 @@ exports.login = async (req, res) => {
         id: user._id,
         userName: user.userName,
         email: user.email,
-        role: user.role,
       },
     });
   } catch (error) {
@@ -164,6 +122,8 @@ exports.userProfile = async (req, res) => {
     res.json("data not fetching");
   }
 };
+
+
 
 exports.verifyToken = (req, res) => {
   res.status(200).json({

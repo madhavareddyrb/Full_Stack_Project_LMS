@@ -16,6 +16,18 @@ export default function UserDashboard() {
     };
   });
 
+  async () => {
+    const token = localStorage.getItem("access_token");
+    console.log(token);
+    if (!token) return;
+
+    await axios.get("http://localhost:3000/user/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
   return (
     <>
       <Navbar />

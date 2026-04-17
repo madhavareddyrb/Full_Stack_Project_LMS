@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
-import { Routes, Route, BrowserRouter } from "react-router";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import HomePage from "./Components/HomePageComponents/HomePage";
 import SignUp from "./Components/Authentication/SignUp/SignUp";
 import SignIn from "./Components/Authentication/SignIn/SignIn";
@@ -10,27 +10,6 @@ import TeachWithUsHomePage from "./Components/InstructoreComponents/TeachWithUsH
 import Protected_Route from "./Components/Protected_Route/Protected_Route";
 
 function App() {
-  useEffect(() => {
-    const verifyUser = async () => {
-      const token = localStorage.getItem("token");
-
-      if (!token) return;
-
-      try {
-        await axios.get("http://localhost:3000/verify", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      } catch (err) {
-        // Token invalid → logout
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-      }
-    };
-
-    verifyUser();
-  }, []);
   return (
     <>
       <BrowserRouter>

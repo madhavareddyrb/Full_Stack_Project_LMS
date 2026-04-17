@@ -2,7 +2,7 @@ const http = require("http");
 const express = require("express");
 const cors = require("cors");
 const { signup, login, userProfile, verifyToken } = require("./routes/routes");
-const { authMiddleware } = require("./middleware/authmiddlware");
+const  {authMiddleware}  = require("./middleware/authMiddlware.jsx");
 const app = express();
 app.use(express.json());
 
