@@ -132,3 +132,16 @@ we use like this app.get("/userprofile", authMiddleware, userProfile);
 2. if not accees token aitomatic unauthorization will come and protected rotut protect tha componet
 
 3. render login page afetr logout
+
+
+#### Some learning from above
+
+1. When i try to authorization i am not getting data becuase of cors issues this came from my typo mistake in corsoptions 
+
+2. i tried in postapi calling middleware i am getting undefind and headers no authorization becuase postmanapi calling and FE calling is not same
+
+3. and getting data in backend but not passing throigh FE just simple close all and open again
+
+4. know where api checking useful and when FE hiting that api is different
+
+5. 
