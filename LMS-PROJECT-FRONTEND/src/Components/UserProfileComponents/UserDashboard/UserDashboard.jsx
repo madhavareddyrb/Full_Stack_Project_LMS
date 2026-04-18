@@ -1,31 +1,3 @@
-// import Navbar from "../../HomePageComponents/Navbar/Navbar";
-// import axios from "axios";
-// import { useEffect, useState } from "react";
-
-// export default function UserDashboard() {
-//   const [getUserData, setGetUserData] = useState([]);
-//   const access_token = localStorage.getItem("access_token");
-
-//   async function getUserData () {
-//     const token = localStorage.getItem("access_token");
-//     console.log(token);
-//     if (!token) return;
-
-//     await axios.get("http://localhost:3000/userprofile", {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//   };
-
-//   return (
-//     <>
-//       <Navbar />
-
-//       <h2>User Profile Coming Soon</h2>
-//     </>
-//   );
-// }
 
 import Navbar from "@/Components/HomePageComponents/Navbar/Navbar";
 import axios from "axios";
@@ -35,8 +7,7 @@ import { useEffect } from "react";
 
 export default function Orders() {
   const [ordersData, setOrdersData] = useState([]);
-  const access_token = localStorage.getItem("access_token");
-  console.log(access_token);
+  
 
   async function getOrders() {
     try {
@@ -62,9 +33,8 @@ export default function Orders() {
   }, []);
 
   return (
-
     <div>
-      <Navbar/>
+      <Navbar />
       Orders
       {ordersData &&
         ordersData.map((ele) => {

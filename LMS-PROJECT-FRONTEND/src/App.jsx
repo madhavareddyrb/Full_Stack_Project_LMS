@@ -26,7 +26,7 @@ function App() {
             element={
               <Protected_Route>
                 <UserDashboard />
-              </Protected_Route>
+               </Protected_Route>
             }
           />
         </Routes>

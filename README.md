@@ -60,7 +60,7 @@
 
 11. Write an submit method that hits LOgin api and check the functonality.
 
-### 16-04-2026: Steps: signup, signin, Protected Route, Logout,jwt verification, auto token verification , auto logout
+### Login,SignUp,Protected Route , LogOut
 
 ##### 1. User Registration: Redefined My model
 
@@ -76,7 +76,7 @@
 
 6. we call this api in fronted and we save this to DB and check errors all functionality befor integrating with frontend.
 
-##### 2. Sign In Functionality
+#### 2. Sign In Functionality
 
 1. We create an login api by checking the user is present ot not
 
@@ -94,52 +94,54 @@
 
 8. If anything failes send interval server in catch method
 
-##### 3. Token Passing through headers for authentication
+#### 3. Token Passing through headers from FE to give authentication permision
+
+###### Backend Steps:
+
+1. create an middleware to get check user is authorised user or not
+
+2. this authorization means access_token(jwt_token) comes from Frontend
+
+3. so we pass req,res, next and first we check headers the authorization present or not
+
+we use like this app.get("/userprofile", authMiddleware, userProfile);
+
+4. here we pass next because we have to use this middleware for every route that contains only authorization people who can see that page and data comes another api 
+
+5. so create an api to get user data with findone to get only particular email data. 
+
+6. pass this api in FE and send here cretae an function with await get method and pass headers Authorization with Bearer ${token}
+
+7. store this data and now hit it. From FE it move to authMiddleware and there we decoded the jwt token with verify method, we erify secret key with token.
+
+8. we send req.email = decoded and next() call next  
+
+9. catech error. 
+
+10. On ui if authorization failes backend data is not getting but FE is displaying not good so use Protected Routes
+
+#### Protected Routes
+
+1. in this if access_token present render the component and if not return to login page
 
 
-🎟️ 3. Token Handling
-Flow:
-Token received from backend
-Stored in localStorage
-Sent in every request via headers
-Authorization: Bearer <token>
-Key Concept:
-Token = user identity for future requests
-🛡️ 4. Protected Routes (Frontend)
-Flow:
-Check if token exists
-If yes → allow access
-If no → redirect to login
-Key Concept:
-UI-level protection (basic layer)
-🔍 5. Token Verification (Backend)
-Flow:
-Receive token from headers
-Verify using JWT secret
-If valid → allow request
-If invalid → return 401
-Key Concept:
-Real security happens in backend
-🔄 6. Auto Token Validation (Frontend)
-Flow:
-On app load → call /verify
-If token valid → continue
-If invalid → logout user
-Key Concept:
-Prevent using expired tokens
-🚪 7. Logout Functionality
-Flow:
-Remove token from localStorage
-Redirect to login page
-Key Concept:
-Logout = remove authentication proof
-⚠️ 8. Auto Logout (Advanced Handling)
-Flow:
-API fails with 401
-Interceptor catches error
-Remove token
-Redirect to login
-Key Concept:
-Centralized error handling
+#### Logout 
+
+1. Create am Function in navbar and if access_token present remove it 
+
+2. if not accees token aitomatic unauthorization will come and protected rotut protect tha componet
+
+3. render login page afetr logout
 
 
+#### Some learning from above
+
+1. When i try to authorization i am not getting data becuase of cors issues this came from my typo mistake in corsoptions 
+
+2. i tried in postapi calling middleware i am getting undefind and headers no authorization becuase postmanapi calling and FE calling is not same
+
+3. and getting data in backend but not passing throigh FE just simple close all and open again
+
+4. know where api checking useful and when FE hiting that api is different
+
+5. 

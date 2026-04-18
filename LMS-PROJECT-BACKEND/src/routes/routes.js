@@ -119,26 +119,7 @@ exports.userProfile = async (req, res) => {
   }
 };
 
-exports.verifyToken = (req, res) => {
-  res.status(200).json({
-    message: "Token is valid",
-    user: req.user,
-  });
-};
 
-exports.dashboard = async (req, res) => {
-  // Find all documents
-  const loginUsersData = userModel.find({});
 
-  console.log(loginUsersData, "loginUsersData");
-  try {
-    const results = await loginUsersData;
 
-    console.log("results", results);
-    res.json({ message: "fetched users data succesfully", results });
-  } catch (error) {
-    res.json({ message: "no data found" });
-    console.log(error);
-  }
-};
 
