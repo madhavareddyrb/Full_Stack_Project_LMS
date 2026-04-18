@@ -35,8 +35,7 @@ import { useEffect } from "react";
 
 export default function Orders() {
   const [ordersData, setOrdersData] = useState([]);
-  const access_token = localStorage.getItem("access_token");
-  console.log(access_token);
+  
 
   async function getOrders() {
     try {
@@ -62,9 +61,8 @@ export default function Orders() {
   }, []);
 
   return (
-
     <div>
-      <Navbar/>
+      <Navbar />
       Orders
       {ordersData &&
         ordersData.map((ele) => {
