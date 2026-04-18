@@ -7,7 +7,6 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // 🔹 1. Validate input
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -15,7 +14,6 @@ exports.login = async (req, res) => {
       });
     }
 
-    // 🔹 2. Find user
     const user = await userModel.findOne({ email });
 
     if (!user) {
@@ -25,7 +23,6 @@ exports.login = async (req, res) => {
       });
     }
 
-    // 🔹 3. Compare password
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -35,7 +32,6 @@ exports.login = async (req, res) => {
       });
     }
 
-    // 🔹 4. Generate JWT
     const token = jwt.sign(
       {
         userId: user._id,
@@ -45,7 +41,6 @@ exports.login = async (req, res) => {
       { expiresIn: "1h" },
     );
 
-    // 🔹 5. Send response (no password)
     return res.status(200).json({
       success: true,
       message: "Login successful",
@@ -115,15 +110,14 @@ exports.signup = async (req, res) => {
 };
 
 exports.userProfile = async (req, res) => {
+  const userData = userModel.find({});
   try {
-    const userData = await userSchema.find({});
-    res.json(userData);
+    const results = await userData
+    res.json({ message: "userData Fetched", results});
   } catch (error) {
     res.json("data not fetching");
   }
 };
-
-
 
 exports.verifyToken = (req, res) => {
   res.status(200).json({
@@ -131,3 +125,20 @@ exports.verifyToken = (req, res) => {
     user: req.user,
   });
 };
+
+exports.dashboard = async (req, res) => {
+  // Find all documents
+  const loginUsersData = userModel.find({});
+
+  console.log(loginUsersData, "loginUsersData");
+  try {
+    const results = await loginUsersData;
+
+    console.log("results", results);
+    res.json({ message: "fetched users data succesfully", results });
+  } catch (error) {
+    res.json({ message: "no data found" });
+    console.log(error);
+  }
+};
+
