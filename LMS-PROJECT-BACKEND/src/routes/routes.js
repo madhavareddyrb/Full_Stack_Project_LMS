@@ -112,14 +112,27 @@ exports.signup = async (req, res) => {
 exports.userProfile = async (req, res) => {
   const userData = userModel.find({});
   try {
-    const results = await userData
-    res.json({ message: "userData Fetched", results});
+    const results = await userData;
+    res.json({ message: "userData Fetched", results });
   } catch (error) {
     res.json("data not fetching");
   }
 };
 
+exports.onBoarding_Complete = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    await userModel.findByIdAndUpdate(user_id, {
+      onBoardingStatus: true,
+    });
 
-
-
-
+    res.status(200).json({
+      success: true,
+      message: "on Boarding Completed You are an instructur now",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "SomeThing went Wrong",
+    });
+  }
+};

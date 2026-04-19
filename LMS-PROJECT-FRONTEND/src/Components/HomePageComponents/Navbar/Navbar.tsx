@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -32,6 +32,8 @@ import {
   PlugIcon,
 } from "lucide-react";
 
+
+
 type LinkItem = {
   title: string;
   href: string;
@@ -54,6 +56,10 @@ export default function Navbar() {
     };
   }, [open]);
 
+ 
+
+
+
 const handleLogout = () => {
   localStorage.removeItem("access_token");
   
@@ -71,10 +77,9 @@ const handleLogout = () => {
       <nav className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4">
         <div className="flex items-center gap-5">
           <NavLink to="/" className="hover:bg-accent rounded-md p-2">
- 
             Home Logo
           </NavLink>
-          
+
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -191,8 +196,7 @@ const handleLogout = () => {
           <NavLink to="signup">
             <Button className="w-full">Sign Up</Button>
           </NavLink>
-
-          <Button className="w-full">Get Started</Button>
+            <Button className="w-full">Get Started</Button>
         </div>
       </MobileMenu>
     </header>

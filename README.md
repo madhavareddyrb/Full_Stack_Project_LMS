@@ -1,6 +1,6 @@
 # LMS PROJECT
 
-### Step 1- downloading dependencies
+#Step 1- downloading dependencies
 
 1. Download Frontend react with vite
 
@@ -8,15 +8,15 @@
 
 3. Install react router dom for path(urls frontend)
 
-### Step 2: Shadcn SetUp and TS
+#Step 2: Shadcn SetUp and TS
 
 1. we need to create jsconfig.json file poject level and install type node(npm install -D @types/node) and update vite.config.js
 
 2. now install shadcn and it will create an ui,lib automatically. UI for advance create and ui and use that anywhere. For Example cards(with same cards courses) and install lucide react for icons
 
-### Authentication:
+#Authentication:
 
-#### Steps - SignUp
+##Steps - SignUp
 
 1. Connect MOngoDB using mongoose and check connection before moving, cors setup, express setup
 
@@ -36,7 +36,7 @@
 
 9. If Everything went well you see your first document in mongodb
 
-#### Steps - SignIn
+##Steps - SignIn
 
 1. After succesfull register or SignUp the data is going to store in User Schema and check where data is Present first.
 
@@ -60,9 +60,9 @@
 
 11. Write an submit method that hits LOgin api and check the functonality.
 
-### Login,SignUp,Protected Route , LogOut
+#Login,SignUp,Protected Route , LogOut
 
-##### 1. User Registration: Redefined My model
+###1. User Registration: Redefined My model
 
 1. Fields required name,email, password
 
@@ -76,7 +76,7 @@
 
 6. we call this api in fronted and we save this to DB and check errors all functionality befor integrating with frontend.
 
-#### 2. Sign In Functionality
+##2. Sign In Functionality
 
 1. We create an login api by checking the user is present ot not
 
@@ -94,9 +94,9 @@
 
 8. If anything failes send interval server in catch method
 
-#### 3. Token Passing through headers from FE to give authentication permision
+##3. Token Passing through headers from FE to give authentication permision
 
-###### Backend Steps:
+####Backend Steps:
 
 1. create an middleware to get check user is authorised user or not
 
@@ -120,12 +120,12 @@ we use like this app.get("/userprofile", authMiddleware, userProfile);
 
 10. On ui if authorization failes backend data is not getting but FE is displaying not good so use Protected Routes
 
-#### Protected Routes
+##Protected Routes
 
 1. in this if access_token present render the component and if not return to login page
 
 
-#### Logout 
+##Logout 
 
 1. Create am Function in navbar and if access_token present remove it 
 
@@ -144,4 +144,24 @@ we use like this app.get("/userprofile", authMiddleware, userProfile);
 
 4. know where api checking useful and when FE hiting that api is different
 
-5. 
+#### Build Teach With Us Complete UI and add logic to it
+
+1. Now user register for teaching with us if user loginIn we render form or else login page so here use this route in protected
+
+2. the Form fields is how much experience you have in teaching,video recording, editing
+
+3. Now Big Question How form will come, do i need to store this data, are we using this data somewhere
+
+4. so we are not this data anywhere so no need to store this data
+
+5. But there is an issue here user clicked on teachWithus and he completed the steps and i don't want to repeat this steps again for user so we need to store is instructor or student by just storing status(instructor or not)
+
+6. Based on That I don't want repeat tha form to instructor again
+
+7. Need To add one More Field to userModel is it create or worng at middle on this
+
+##### Navbar fixing befor login and After login
+
+1. Before Login signin,sinup buttons reasonable after login showing this buttons are usefull i  need to remove it
+
+2. Based on token and protected route we can achive it. Learn how to properly use already existed navbar. 

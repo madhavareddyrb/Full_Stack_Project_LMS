@@ -1,25 +1,8 @@
-// import "./TeachWithUsHeroBanner.css"
-
-// export default function TeachWithUsHeroBanner() {
-//   return (
-//     <>
-//       <div className="teachwithusbanner">
-//         <h2>Come Teach With us </h2>
-//         <p>
-//           Share your knowledge, inspire learners, and build a meaningful career <br />
-//           -- while transforming your own journey.
-//         </p>
-//         <button>Get Started</button>
-//       </div>
-//     </>
-//   );
-// }
-
-
 "use client";
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { NavLink } from "react-router";
 
 function FloatingPaths({ position }: { position: number }) {
   const paths = Array.from({ length: 36 }, (_, i) => ({
@@ -130,9 +113,11 @@ export default function TeachWithUsHeroBanner({
                             group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
                             hover:shadow-md dark:hover:shadow-neutral-800/50"
             >
-              <span className="opacity-90 group-hover:opacity-100 transition-opacity">
-                Get Started
-              </span>
+              <NavLink to="/instructor/form">
+                <span className="opacity-90 group-hover:opacity-100 transition-opacity">
+                  Get Started
+                </span>
+              </NavLink>
               <span
                 className="ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 
                                 transition-all duration-300"
