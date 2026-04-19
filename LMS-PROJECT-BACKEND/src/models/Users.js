@@ -23,6 +23,10 @@ const userModel = new mongoose.Schema(
       required: [true, "Password is Required"],
       minlength: [6, "Minimum 6 Characters"],
     },
+    onBoardingStatus: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );

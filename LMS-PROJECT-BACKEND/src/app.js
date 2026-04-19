@@ -7,6 +7,7 @@ const {
   userProfile,
   verifyToken,
   dashboard,
+  onBoarding_Complete,
 } = require("./routes/routes");
 const { authMiddleware } = require("./middleware/authMiddlware.jsx");
 const app = express();
@@ -24,5 +25,6 @@ app.post("/signup", signup);
 app.post("/login", login);
 app.get("/users", userProfile)
 app.get("/userprofile", authMiddleware, userProfile);
+app.get("instructor/onboarding-complete", authMiddleware, onBoarding_Complete);
 
 module.exports = app;
