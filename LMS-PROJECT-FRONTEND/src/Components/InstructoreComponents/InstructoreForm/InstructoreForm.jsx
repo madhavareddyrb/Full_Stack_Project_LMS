@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "@/Components/HomePageComponents/Navbar/Navbar";
-import api from "@/jwtVerify";
 import { NavLink } from "react-router";
+import api from "../../../../jwtVerify"
 export default function InstructorForm() {
   const [step, setStep] = useState(1);
   const [selectOption, setSelectOption] = useState();
