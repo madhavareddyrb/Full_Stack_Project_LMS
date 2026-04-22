@@ -1,20 +1,33 @@
-useEffect(() => {
-  const verifyUser = async () => {
-    const token = localStorage.getItem("access_token");
-    console.log(token);
-    if (!token) return;
-    try {
-      await axios.get("http://localhost:3000/verify", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    } catch (err) {
-      // Token invalid → logout
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "http://localhost:3000",
+});
+
+// Request interceptor → attach token
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("access_token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+// Response interceptor → handle errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // 🔥 Auto logout
       localStorage.removeItem("access_token");
+
       window.location.href = "/login";
     }
-  };
 
-  verifyUser();
-}, []);
+    return Promise.reject(error);
+  },
+);
+
+export default api;

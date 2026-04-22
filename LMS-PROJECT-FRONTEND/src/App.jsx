@@ -8,9 +8,8 @@ import SignIn from "./Components/Authentication/SignIn/SignIn";
 import UserDashboard from "./Components/UserProfileComponents/UserDashboard/UserDashboard";
 import TeachWithUsHomePage from "./Components/InstructoreComponents/TeachWithUsHomePage/TeachWithUsHomePage";
 import Protected_Route from "./Components/Protected_Route/Protected_Route";
-import TeacherForm from "./Components/InstructoreComponents/TeacherDashboard/TeacherForm";
-
-
+import InstructorForm from "./Components/InstructoreComponents/InstructorForm/InstructorForm"
+import InstructorDashboard from "./Components/InstructoreComponents/TeacherDashboard/InstructorDashboard/InstructorDashboard"
 
 function App() {
   return (
@@ -33,7 +32,22 @@ function App() {
             }
           />
 
-          <Route path="/instructor/form" element = { <Protected_Route> <TeacherForm/> </Protected_Route>} />
+          <Route
+            path="/instructor/form"
+            element={
+              <Protected_Route>
+                <InstructorForm />
+              </Protected_Route>
+            }
+          />
+          <Route
+            path="/instructor/dashboard"
+            element={
+              <Protected_Route>
+                <InstructorDashboard />
+              </Protected_Route>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

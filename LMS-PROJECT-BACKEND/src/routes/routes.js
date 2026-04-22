@@ -120,10 +120,13 @@ exports.userProfile = async (req, res) => {
 };
 
 exports.onBoarding_Complete = async (req, res) => {
+
+  
   try {
-    const userId = req.user.id;
-    await userModel.findByIdAndUpdate(user_id, {
+    const userId = req.user.userId
+    await userModel.findByIdAndUpdate(userId, {
       onBoardingStatus: true,
+
     });
 
     res.status(200).json({

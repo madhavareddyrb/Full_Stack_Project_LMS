@@ -165,3 +165,24 @@ we use like this app.get("/userprofile", authMiddleware, userProfile);
 1. Before Login signin,sinup buttons reasonable after login showing this buttons are usefull i  need to remove it
 
 2. Based on token and protected route we can achive it. Learn how to properly use already existed navbar. 
+
+
+#### How To Get OnBoarding Status True When user only on Instructor Form Submit 
+
+1. now i am getting just hiting the route/api
+
+2. Now need to update only when form is submitted need to change onBoarding status until false
+
+3. onClick call the function lets try this 
+
+4. Its working and and i want to navigate instructor dashboard and this urls will be dynamic based on user name
+
+#### Authorization Step Optimization
+
+1. For every authrised route and which checks token and return checks with authmiddleware writing same code again and again hard
+
+2. So every route in Protected Route so create this  authorization steps in protected route it will take of everything
+
+3. when calling for api it is not good so this is bad idea
+
+4. Create an js file for port instand of that port and full api we all with api(api)
