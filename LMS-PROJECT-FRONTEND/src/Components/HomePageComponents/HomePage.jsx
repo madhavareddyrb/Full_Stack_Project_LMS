@@ -1,10 +1,12 @@
 import react from "react";
-import Navbar from "./Navbar/Navbar";
+import Navbar from "./Navbar/Navbar"
 
 export default function HomePage() {
-  return (
-    <>
-      <Navbar />
-    </>
-  );
+  return(<>
+  
+  <h1>Home Page</h1>
+
+  <Navbar />
+  </>)
+    
 }
