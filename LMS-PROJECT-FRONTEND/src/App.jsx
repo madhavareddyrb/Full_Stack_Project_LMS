@@ -10,6 +10,8 @@ import TeachWithUsHomePage from "./Components/InstructoreComponents/TeachWithUsH
 import Protected_Route from "./Components/Protected_Route";
 import InstructorForm from "./Components/InstructoreComponents/InstructoreForm/InstructoreForm";
 import SignUp from "./Components/Authentication/SignUp/SignUp";
+import InstructorDashboard from "./Components/InstructoreComponents/InstructorDashboard/InstructorDashboard";
+import InstructorCourses from "./Components/InstructoreComponents/InstructorDashboard/InstructorCourses/InstructorCourses";
 
 
 
@@ -34,7 +36,31 @@ function App() {
             }
           />
 
-          <Route path="/instructor/form" element = { <Protected_Route> <InstructorForm/> </Protected_Route>} />
+          <Route
+            path="/instructor/form"
+            element={
+              <Protected_Route>
+                {" "}
+                <InstructorForm />{" "}
+              </Protected_Route>
+            }
+          />
+          <Route
+            path="/instructor/dashboard"
+            element={
+              <Protected_Route>
+                <InstructorDashboard />
+              </Protected_Route>
+            }
+          />
+          <Route
+            path="/instructor/courses"
+            element={
+              <Protected_Route>
+                <InstructorCourses />
+              </Protected_Route>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

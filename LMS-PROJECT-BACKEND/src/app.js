@@ -23,8 +23,9 @@ app.use(cors(corsOptions));
 
 app.post("/signup", signup);
 app.post("/login", login);
-app.get("/users", userProfile);
 app.get("/userprofile", authMiddleware, userProfile);
-app.get("instructor/onboarding-complete", authMiddleware, onBoarding_Complete);
+app.get("/ins", onBoarding_Complete);
+
+app.get("/instructor/onboarding-complete", authMiddleware, onBoarding_Complete);
 
 module.exports = app;

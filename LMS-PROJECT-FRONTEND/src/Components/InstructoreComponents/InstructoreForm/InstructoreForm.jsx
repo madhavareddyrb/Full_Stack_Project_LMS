@@ -5,7 +5,6 @@ import { NavLink } from "react-router";
 import api from "../../../../jwtVerify"
 export default function InstructorForm() {
   const [step, setStep] = useState(1);
-  const [selectOption, setSelectOption] = useState();
   const handleFinish = async () => {
     try {
       const token = localStorage.getItem("access_token");

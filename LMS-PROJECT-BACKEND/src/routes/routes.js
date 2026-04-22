@@ -1,11 +1,11 @@
-const userModel = require("../models/Users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const userModel = require("../Modals/User");
 require("dotenv").config();
 
 exports.login = async (req, res) => {
+  console.log(req.body)
   try {
-    const { email, password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({

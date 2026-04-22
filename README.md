@@ -186,3 +186,17 @@ we use like this app.get("/userprofile", authMiddleware, userProfile);
 3. when calling for api it is not good so this is bad idea
 
 4. Create an js file for port instand of that port and full api we all with api(api)
+
+
+#### Course Creation - Fileds and Required Forms
+
+1. What type of course First, let's find out what type of course you're making.Course (videos,quizs,coding exercise), Practice Test(certificate exams)
+
+2. How about a working title?It's ok if you can't think of a good title now. You can change it later.
+
+3. What category What category best fits the knowledge you'll share?. If you're not sure about the right category, you can change it later.
+
+4. How much time can you spend creating your course per week?
+There's no wrong answer. We can help you achieve your goals even if you don't have much time. 02, 2-4, 5+, not decided
+x
+5. Side Navbar, Main Courses, Create Course Ravali
