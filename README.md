@@ -198,5 +198,24 @@ we use like this app.get("/userprofile", authMiddleware, userProfile);
 
 4. How much time can you spend creating your course per week?
 There's no wrong answer. We can help you achieve your goals even if you don't have much time. 02, 2-4, 5+, not decided
-x
-5. Side Navbar, Main Courses, Create Course Ravali
+
+###### Internal course - Course landing page, 
+
+1. What will students learn in your course?(learn, atleasst 4 input fields) add more button
+
+2. What are the requirements or prerequisites for taking your course?
+
+3. Who is this course for?
+
+4. Curriculum - divide this into sections section1  heading, leacture 1 add content video,artice, youtube link  add more section buttons
+
+5. Curriculum Item (Quiz, coding exercise, assignment) for every section and heading
+
+
+#### DataBase Creation Ideas
+
+1. Create a Model for type,title, Category like Course_Category_Model
+
+2. Create a Model for internal Course steps, learn,prerequisites, who, curriculum, 
+
+3. Connection for course_category_Model and Course Details through category or all in one category which one is good. 
