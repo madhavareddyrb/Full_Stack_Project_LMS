@@ -4,7 +4,7 @@ const userModel = require("../Modals/User");
 require("dotenv").config();
 
 exports.login = async (req, res) => {
-  console.log(req.body)
+  const {email, password} = req.body
   try {
 
     if (!email || !password) {
@@ -14,7 +14,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email: email });
 
     if (!user) {
       return res.status(401).json({
