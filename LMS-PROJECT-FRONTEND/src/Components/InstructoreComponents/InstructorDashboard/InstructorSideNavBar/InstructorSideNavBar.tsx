@@ -1,85 +1,93 @@
-import {
-  BookOpen,
-  MessageSquare,
-  BarChart2,
-  Wrench,
-  HelpCircle,
-} from "lucide-react";
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
-import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-
-import { useState } from "react";
-
-export default function InstructorSideNavBar() {
-  const [navigate, setNavigate] = useState("");
-  const menuItems = [
-    { name: "Courses", icon: BookOpen },
-    { name: "Communication", icon: MessageSquare },
-    { name: "Performance", icon: BarChart2 },
-    { name: "Tools", icon: Wrench },
-    { name: "Resources", icon: HelpCircle },
-  ];
-
-  const NavigatePaths = (e) => {
-    console.log(e.target, "e target");
-    setNavigate(e.target);
-  };
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <div className="flex">
-      <div
-        className="
-        group h-screen bg-[#1c1d1f] text-white
-        w-16 hover:w-64 transition-all duration-300 ease-in-out
-        overflow-hidden
-      "
-      >
-        <div className="flex items-center gap-3 p-4">
-          <div className="text-purple-500 font-bold text-xl">U</div>
-          <span className="opacity-0 group-hover:opacity-100 transition-all">
-            udemy
-          </span>
-        </div>
-
-        <div className="mt-6 flex flex-col gap-2 px-2">
-          {menuItems.map((item, index) => {
-            const Icon = item.icon;
-
-            return (
-              <Tooltip key={index}>
-                <TooltipTrigger asChild>
-                  <Button
-                    onClick={NavigatePaths}
-                    variant="ghost"
-                    className="w-full justify-start gap-4 text-white hover:bg-gray-700"
-                  >
-                    <Icon size={20} />
-
-                    <span className="opacity-0 group-hover:opacity-100 transition-all">
-                      {item.name}
-                    </span>
-                  </Button>
-                </TooltipTrigger>
-
-                <TooltipContent side="right" onClick={NavigatePaths}>
-                  {item.name}
-                </TooltipContent>
-                {navigate}
-              </Tooltip>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="flex-1 p-10">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-      </div>
-      
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
   );
 }
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
+  };
+}
+
+export default function InstructorSideNavBar() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box
+      sx={{
+        flexGrow: 1,
+        bgcolor: "background.black",
+        display: "flex",
+      }}
+    >
+      <Tabs
+        orientation="vertical"
+        value={value}
+        onChange={handleChange}
+      >
+        <Tab label="Item One" {...a11yProps(0)} />
+        <Tab label="Item Two" {...a11yProps(1)} />
+        <Tab label="Item Three" {...a11yProps(2)} />
+        <Tab label="Item Four" {...a11yProps(3)} />
+        <Tab label="Item Five" {...a11yProps(4)} />
+        <Tab label="Item Six" {...a11yProps(5)} />
+        <Tab label="Item Seven" {...a11yProps(6)} />
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        Item One
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Item Four
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        Item Five
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        Item Six
+      </TabPanel>
+      <TabPanel value={value} index={6}>
+        Item Seven
+      </TabPanel>
+    </Box>
+  );
+}
+{/* <span class="MuiTabs-indicator css-oewvya-MuiTabs-indicator" style="top: 96px; height: 48px;"></span> */}
