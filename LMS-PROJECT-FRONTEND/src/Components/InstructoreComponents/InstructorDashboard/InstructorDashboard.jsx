@@ -1,11 +1,11 @@
-import InstructorCourses from "./InstructorCourses/InstructorCourses";
-import InstructorSideNavBar from "./InstructorSideNavBar/InstructorSideNavBar"
+import InstructorCourses from "./CreateCourse/CreateCourse";
+import InstructorSideNavBar from "./InstructorSideNavBar/InstructorSideNavBar";
 
 export default function InstructorDashboard() {
-  return (<>
-
-<InstructorSideNavBar/>
-<InstructorCourses/>
-
-  </>);
+  return (
+    <>
+      <InstructorSideNavBar />
+      {/* <InstructorCourses /> */}
+    </>
+  );
 }

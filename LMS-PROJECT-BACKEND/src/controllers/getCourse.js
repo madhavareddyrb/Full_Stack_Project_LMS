@@ -1,10 +1,8 @@
-const Course = require("../Modals/Course");
+const Course = require("../models/Course");
 
-const getSingleCourse = async (req, res) => {
+exports.getSingleCourse = async (req, res) => {
   try {
-    const courseId = req.params.id;
-
-    const course = await Course.findById(courseId).populate({
+    const course = await Course.findById(req.params.id).populate({
       path: "sections",
       populate: {
         path: "lessons",
@@ -22,5 +20,3 @@ const getSingleCourse = async (req, res) => {
     });
   }
 };
-
-module.exports = getSingleCourse;

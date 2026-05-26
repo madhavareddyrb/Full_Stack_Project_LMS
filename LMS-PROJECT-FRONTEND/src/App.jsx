@@ -11,9 +11,8 @@ import Protected_Route from "./Components/Protected_Route";
 import InstructorForm from "./Components/InstructoreComponents/InstructoreForm/InstructoreForm";
 import SignUp from "./Components/Authentication/SignUp/SignUp";
 import InstructorDashboard from "./Components/InstructoreComponents/InstructorDashboard/InstructorDashboard";
-import InstructorCourses from "./Components/InstructoreComponents/InstructorDashboard/InstructorCourses/InstructorCourses";
-
-
+import InstructorCourses from "./Components/InstructoreComponents/InstructorDashboard/CreateCourse/CreateCourse";
+import CreateLesson from "./Components/InstructoreComponents/InstructorDashboard/CreateLesson/CreateLesson";
 
 function App() {
   return (
@@ -58,6 +57,15 @@ function App() {
             element={
               <Protected_Route>
                 <InstructorCourses />
+              </Protected_Route>
+            }
+          />
+
+          <Route
+            path="/create-lesson"
+            element={
+              <Protected_Route>
+                <CreateLesson />
               </Protected_Route>
             }
           />
