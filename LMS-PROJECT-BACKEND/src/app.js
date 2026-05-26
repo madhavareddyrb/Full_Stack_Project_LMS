@@ -11,12 +11,10 @@ const {
 } = require("./routes/routes");
 
 const { authMiddleware } = require("./middleware/authMiddlware.jsx");
-const {
-  createCourse,
-  createSection,
-  createLesson,
-} = require("./controllers/courseCreation.js");
-const getSingleCourse = require("./controllers/getCourse.js");
+const { createCourse, getCourses } = require("./controllers/createCourse.js");
+const { createSection } = require("./controllers/sectionController.js");
+const { createLesson } = require("./controllers/lessonController.js");
+
 const app = express();
 app.use(express.json());
 
@@ -35,11 +33,12 @@ app.get("/ins", onBoarding_Complete);
 
 app.get("/instructor/onboarding-complete", authMiddleware, onBoarding_Complete);
 
-app.post("/create/course", createCourse);
-app.post("/create/section", createSection);
-app.post("/create/lesson", createLesson);
+app.post("/course/create", createCourse);
+app.post("/section/create", createSection);
+app.post("/lesson/create", createLesson);
+app.post("/getcourses", getCourses)
 
-app.get("/course/:id", getSingleCourse)
+// app.get("/course/:id", getSingleCourse)
 
 
 module.exports = app;

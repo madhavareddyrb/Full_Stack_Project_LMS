@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const LessonSchema = new mongoose.Schema(
+const lessonSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -17,12 +17,7 @@ const LessonSchema = new mongoose.Schema(
     },
 
     duration: {
-      type: Number, // in minutes
-    },
-
-    isPreviewFree: {
-      type: Boolean,
-      default: false,
+      type: Number,
     },
 
     section: {
@@ -30,7 +25,9 @@ const LessonSchema = new mongoose.Schema(
       ref: "Section",
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  },
 );
 
-module.exports = mongoose.model("Lesson", LessonSchema);
+module.exports = mongoose.model("Lesson", lessonSchema);

@@ -4,6 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import CreateCourse from "../CreateCourse/CreateCourse";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,13 +54,9 @@ export default function InstructorSideNavBar() {
         display: "flex",
       }}
     >
-      <Tabs
-        orientation="vertical"
-        value={value}
-        onChange={handleChange}
-      >
-        <Tab label="Item One" {...a11yProps(0)} />
-        <Tab label="Item Two" {...a11yProps(1)} />
+      <Tabs orientation="vertical" value={value} onChange={handleChange}>
+        <Tab label="Home Icon" {...a11yProps(0)} />
+        <Tab label="Courses" {...a11yProps(1)} />
         <Tab label="Item Three" {...a11yProps(2)} />
         <Tab label="Item Four" {...a11yProps(3)} />
         <Tab label="Item Five" {...a11yProps(4)} />
@@ -70,7 +67,7 @@ export default function InstructorSideNavBar() {
         Item One
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <CreateCourse />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
@@ -90,4 +87,6 @@ export default function InstructorSideNavBar() {
     </Box>
   );
 }
-{/* <span class="MuiTabs-indicator css-oewvya-MuiTabs-indicator" style="top: 96px; height: 48px;"></span> */}
+{
+  /* <span class="MuiTabs-indicator css-oewvya-MuiTabs-indicator" style="top: 96px; height: 48px;"></span> */
+}

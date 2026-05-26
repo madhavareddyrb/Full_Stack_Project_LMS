@@ -5,7 +5,6 @@ const courseSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      trim: true,
     },
 
     description: {
@@ -13,18 +12,13 @@ const courseSchema = new mongoose.Schema(
       required: true,
     },
 
-    thumbnail: {
-      type: String,
-    },
-
     price: {
       type: Number,
-      default: 3999,
+      required: true,
     },
 
-    instructor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    thumbnail: {
+      type: String,
     },
 
     sections: [
@@ -34,7 +28,9 @@ const courseSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true },
+  {
+    timestamps: true,
+  },
 );
 
 module.exports = mongoose.model("Course", courseSchema);
